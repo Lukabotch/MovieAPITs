@@ -1,7 +1,10 @@
 .currencyAndFlagDiv{
     display: flex;
-    justify-content:center;
+    justify-content:start;
     align-items: center;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+
 }
 .movieField{
     display: flex;

@@ -4,7 +4,8 @@ const htmlWebpackPlugin = require("html-webpack-plugin");
 const AddAssetHtmlPlugin = require("add-asset-html-webpack-plugin");
 
 module.exports = {
-  entry: path.resolve(__dirname, "src", "index.js"),
+  entry: path.resolve(__dirname, "src", "index.ts"),
+  devtool: "inline-source-map",
   mode: "development",
   output: {
     path: path.resolve(__dirname, "./dist"),
@@ -16,12 +17,20 @@ module.exports = {
       inject: true,
     }),
   ],
+  resolve: {
+    extensions: [".ts", ".tsx", ".js"],
+    extensionAlias: {
+      ".js": [".js", ".ts"],
+      ".cjs": [".cjs", ".cts"],
+      ".mjs": [".mjs", ".mts"],
+    },
+  },
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.([cm]?ts|tsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader"],
+        use: ["ts-loader"],
       },
       {
         test: /\.css$/i,
